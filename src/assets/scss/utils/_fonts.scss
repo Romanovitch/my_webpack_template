@@ -1,0 +1,30 @@
+$font-paths: '../fonts/';
+
+
+@mixin font-face($name, $weight: normal, $style: normal){
+  $path: $font-paths + $name + '/' + $name;
+  @font-face {
+    font-family: $name;
+    font-weight: $weight;
+    font-style: $style;
+    src: url($path + '.eot');
+    src: url($path + '.eot?#iefix') format('embedded-opentype'),
+        url($path + '.woff2') format('woff2'),
+        url($path + '.woff') format('woff'),
+        url($path + '.ttf') format('truetype')
+    ;
+  }
+}
+
+// @include font-face('LucidaSans-Italic', $style: normal, $weight: normal);
+// @include font-face('SegoeUI-Light', $style: normal, $weight: normal);
+// @include font-face('SegoeUI-Bold', $style: normal, $weight: bold);
+// @include font-face('SegoeUI', $style: normal, $weight: normal);
+@include font-face('SegoeWP', $style: normal, $weight: normal);
+@include font-face('SegoeWP-Light', $style: normal, $weight: normal);
+// @include font-face('Asap-Regular', $style: normal, $weight: normal);
+// @include font-face('PTSans-Regular', $style: normal, $weight: normal);
+// @include font-face('PTSans-Narrow', $style: normal, $weight: normal);
+// @include font-face('OpenSans', $style: normal, $weight: normal);
+
+// SegoeUI-Bold
