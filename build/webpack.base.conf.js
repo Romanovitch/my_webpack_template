@@ -29,8 +29,8 @@ module.exports = {
     // module: `${PATHS.src}/your-module.js`,
   },
   output: {
-    // filename: `${PATHS.assets}js/[name].js`,
-    filename: `${PATHS.assets}js/[name].[hash].js`,
+    filename: `${PATHS.assets}js/[name].js`,
+    // filename: `${PATHS.assets}js/[name].[hash].js`, // +hash к имени файла
     path: PATHS.dist,
     publicPath: '/'
   },
@@ -127,7 +127,20 @@ module.exports = {
         }
       ]
     }, 
-
+    // в html-файле позволяет писать пути 
+      // к картинкам обычным способом 
+      // без <img src=<%= require("./*.*.jpg") %> >
+    { 
+      test: /\.html$/,
+      use: [
+        {
+          loader: 'html-loader',
+          options: {
+            pretty: true
+          }
+        }
+      ]
+    }
   ]
   },
   resolve: {
@@ -159,5 +172,6 @@ module.exports = {
       filename: `./${page}`
     })),
     new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(['../dist']), //! чегото не работает
   ],
 }
