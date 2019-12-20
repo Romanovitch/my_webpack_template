@@ -5,6 +5,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 // const { VueLoaderPlugin } = require('vue-loader')
+const merge = require('webpack-merge')
 
 // Main const
 // see more: https://github.com/vedees/webpack-template/blob/master/README.md#main-const
@@ -19,7 +20,7 @@ const PATHS = {
 const PAGES_DIR = PATHS.src
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.html'))
 
-module.exports = {
+const baseConf = {
   // BASE config
   externals: {
     paths: PATHS
@@ -45,7 +46,45 @@ module.exports = {
         }
       }
     }
-  },
+  }
+}
+
+const js = {
+
+}
+
+module.exports = merge([
+  baseConf,
+  
+])
+
+module.exports = {
+  // // BASE config
+  // externals: {
+  //   paths: PATHS
+  // },
+  // entry: {
+  //   app: PATHS.src,
+  //   // module: `${PATHS.src}/your-module.js`,
+  // },
+  // output: {
+  //   filename: `${PATHS.assets}js/[name].js`,
+  //   // filename: `${PATHS.assets}js/[name].[hash].js`, // +hash к имени файла
+  //   path: PATHS.dist,
+  //   publicPath: '/'
+  // },
+  // optimization: {
+  //   splitChunks: {
+  //     cacheGroups: {
+  //       vendor: {
+  //         name: 'vendors',
+  //         test: /node_modules/,
+  //         chunks: 'all',
+  //         enforce: true
+  //       }
+  //     }
+  //   }
+  // },
   module: {
     rules: [{
       test: /\.js$/,
