@@ -10,13 +10,13 @@ const devConf = {
 
 const devServer = {
   devServer: {
-    contentBase: baseWebpackConfig.externals.paths.dist,
+    // contentBase: baseWebpackConfig.externals.paths.dist,
     port: 8081,
     overlay: {
       warnings: true,
       errors: true
     }
-  },
+  }
 }
 
 const plugins = {

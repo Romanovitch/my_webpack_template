@@ -50,41 +50,145 @@ const baseConf = {
 }
 
 const js = {
-
+  test: /\.js$/,
+  loader: 'babel-loader',
+  exclude: '/node_modules/'
 }
 
-module.exports = merge([
-  baseConf,
-  
-])
+const fonts = {
+  test: /\.(woff(2)?|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
+  loader: 'file-loader',
+  options: {
+    name: `${PATHS.assets}fonts/[folder]/[name].[ext]`
+
+    // создает папку [folder] в любом случае, даже fonts/
+    // name: `${PATHS.assets}fonts/[folder]/[name].[ext]` // 
+
+    // вставляет в корень dist
+    // name: `[name].[ext]` 
+    // [path]
+  }
+}
+
+const images = {
+  test: /\.(png|jpe?g|gif|svg)$/,
+  use: [
+    {
+      loader: 'file-loader',
+      options: {
+        // name: `${PATHS.assets}img/[name].[ext]`,
+        name: `assets/img/[name].[ext]`,
+
+        // вставляет в корень dist
+        // name: '[name].[ext]',
+
+        // outputPath: './',
+        // useRelativePath: true
+      }
+    } 
+  ]
+}
+
+const scss = {
+  test: /\.scss$/,
+  use: [
+    'style-loader',
+    MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: { sourceMap: true }
+    }, 
+    {
+      loader: 'postcss-loader',
+      options: { sourceMap: true, config: { path: `./postcss.config.js` } }
+    }, 
+    {
+      loader: 'sass-loader',
+      options: { sourceMap: true }
+    }
+  ]
+}
+
+const css = {
+  test: /\.css$/,
+  use: [
+    'style-loader',
+    MiniCssExtractPlugin.loader,
+    {
+      loader: 'css-loader',
+      options: { sourceMap: true }
+    }, 
+    {
+      loader: 'postcss-loader',
+      options: { sourceMap: true, config: { path: `./postcss.config.js` } }
+    }
+  ]
+}
+
+const html = {
+  test: /\.html$/,
+  use: [
+    {
+      loader: 'html-loader',
+      options: {
+        pretty: true
+      }
+    }
+  ]
+}
+
+// module.exports =  function () {
+//   return merge([
+//     baseConf,
+//     js,
+//     fonts,
+//     images,
+//     scss,
+//     css,
+//     html
+//   ])
+// }
+
+// module.exports =  merge([
+//     baseConf,
+//     js,
+//     fonts,
+//     images,
+//     scss,
+//     css,
+//     html
+//   ])
+
+
+
 
 module.exports = {
-  // // BASE config
-  // externals: {
-  //   paths: PATHS
-  // },
-  // entry: {
-  //   app: PATHS.src,
-  //   // module: `${PATHS.src}/your-module.js`,
-  // },
-  // output: {
-  //   filename: `${PATHS.assets}js/[name].js`,
-  //   // filename: `${PATHS.assets}js/[name].[hash].js`, // +hash к имени файла
-  //   path: PATHS.dist,
-  //   publicPath: '/'
-  // },
-  // optimization: {
-  //   splitChunks: {
-  //     cacheGroups: {
-  //       vendor: {
-  //         name: 'vendors',
-  //         test: /node_modules/,
-  //         chunks: 'all',
-  //         enforce: true
-  //       }
-  //     }
-  //   }
-  // },
+  // BASE config
+  externals: {
+    paths: PATHS
+  },
+  entry: {
+    app: PATHS.src,
+    // module: `${PATHS.src}/your-module.js`,
+  },
+  output: {
+    filename: `${PATHS.assets}js/[name].js`,
+    // filename: `${PATHS.assets}js/[name].[hash].js`, // +hash к имени файла
+    path: PATHS.dist,
+    publicPath: '/'
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        vendor: {
+          name: 'vendors',
+          test: /node_modules/,
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
+  },
   module: {
     rules: [{
       test: /\.js$/,
@@ -189,9 +293,9 @@ module.exports = {
     }
   },
   plugins: [
-    // new HtmlWebpackPlugin({
-    //   template: './src/index.html'
-    // }),
+    new HtmlWebpackPlugin({
+      template: './src/index.html'
+    }),
     // new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: `${PATHS.assets}css/[name].css`,

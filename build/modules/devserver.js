@@ -8,5 +8,9 @@ module.exports = function () {
         errors: true
       }
     }
+  //   devServer: {
+  //     stats: 'errors-only',
+  //     port: 9000
+  // }
   }
 }
