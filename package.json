@@ -4,10 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev-v1": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
-    "build-v1": "webpack --config ./build/webpack.build.conf.js",
-    "dev-v2": "webpack-dev-server --env development",
-    "build-v2": "webpack --env production"
+    "dev-v3": "webpack-dev-server --open --config ./build/3webpack.dev.conf.js",
+    "build-v3": "webpack --config ./build/3webpack.build.conf.js"
   },
   "browserslist": [
     "> 1%",
@@ -16,7 +14,7 @@
   "author": "https://github.com/Romanovitch",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Romanovitch/theyalow.git"
+    "url": "git+https://github.com/Romanovitch/my_webpack_template"
   },
   "keywords": [
     "webpack",

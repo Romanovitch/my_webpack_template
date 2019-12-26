@@ -1,13 +1,19 @@
 module.exports = function () {
   return {
-    test: /\.html$/,
-    use: [
-      {
-        loader: 'html-loader',
-        options: {
-          pretty: true
+    module: {
+      rules: [
+        { 
+          test: /\.html$/,
+          use: [
+            {
+              loader: 'html-loader',
+              options: {
+                pretty: true
+              }
+            }
+          ]
         }
-      }
-    ]
+      ]
+    }
   }
 }

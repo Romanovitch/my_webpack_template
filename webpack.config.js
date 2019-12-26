@@ -6,7 +6,12 @@ const merge = require('webpack-merge')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 const devServerMod = require('./build/modules/devserver')
+const jsMod = require('./build/modules/js') 
+const fontsMod = require('./build/modules/fonts') 
+const imagesMod = require('./build/modules/images') 
 const scssMod = require('./build/modules/scss') 
+const cssMod = require('./build/modules/css') 
+const htmlMod = require('./build/modules/html') 
 
 const PATHS = {
   src: path.join(__dirname, 'src'),
@@ -20,6 +25,7 @@ const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.h
 const devServer = {
   devServer: {
     contentBase: PATHS.dist,
+
     port: 8081,
     overlay: {
       warnings: true,
@@ -166,38 +172,72 @@ const common = merge([
     ]
   },
   // js,
+  jsMod(),
   // fonts,
+  fontsMod(),
   // images,
+  imagesMod(),
   // scss,
+  scssMod(),
   // css,
-  // html
+  cssMod(),
+  // html,
+  htmlMod(),
 ])
 
-module.exports = function(env) {
-  if (env === 'production'){
-    return merge([
-      common,
-      js,
-      fonts,
-      images,
-      // scss,
-      scssMod(),
-      css,
-      html
-    ])
-  };
-  if (env === 'development') {
-    return merge([
-      common,
-      js,
-      fonts,
-      images,
-      // scss,
-      scssMod(),
-      css,
-      html,
-      devServerMod(),
-      // devServer
-    ])
-  }
+const devPlugins = {
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[file].map'
+    })
+  ]
 }
+
+const devConf = {
+  // DEV config
+  mode: 'development',
+  devtool: 'cheap-module-eval-source-map',
+}
+const devWebpackConfig = merge ([
+  common,
+  devConf,
+  devServerMod(PATHS),
+  devPlugins
+])
+
+module.exports = new Promise((resolve, reject) => {
+  resolve(devWebpackConfig)
+})
+
+// module.exports = function(env) {
+//   if (env === 'production'){
+//     return merge([
+//       common,
+//       // js,
+//       jsMod(),
+//       // fonts,
+//       fontsMod(PATHS),
+//       // images,
+//       imagesMod(),
+//       // scss,
+//       scssMod(),
+//       // css,
+//       cssMod(),
+//       // html,
+//       htmlMod()
+//     ])
+//   };
+//   if (env === 'development') {
+//     // return new Promise((resolve, reject) => {
+//     //   resolve(devWebpackConfig)
+//     // })
+//     return merge([
+//       devWebpackConfig
+
+//       // common,
+//       // devConf,
+//       // devServerMod(),
+//       // devPlugins
+//     ])
+//   }
+// }

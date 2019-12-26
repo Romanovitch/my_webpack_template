@@ -1,6 +1,8 @@
-module.exports = function () {
+module.exports = function (PATHS) {
   return {
     devServer: {
+      
+    contentBase: PATHS.dist,
       // contentBase: baseWebpackConfig.externals.paths.dist,
       port: 8081,
       overlay: {
