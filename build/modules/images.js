@@ -1,3 +1,5 @@
+const PATHS = require('./myPATHS') 
+
 module.exports = function () {
   return {
     module: {
@@ -8,8 +10,8 @@ module.exports = function () {
             {
               loader: 'file-loader',
               options: {
-                // name: `${PATHS.assets}img/[name].[ext]`,
-                name: `assets/img/[name].[ext]`,
+                name: `${PATHS.assets}img/[name].[ext]`,
+                // name: `assets/img/[name].[ext]`,
     
                 // вставляет в корень dist
                 // name: '[name].[ext]',

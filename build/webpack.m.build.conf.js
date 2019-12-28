@@ -1,5 +1,5 @@
 const merge = require('webpack-merge')
-const baseWebpackConfig = require('./webpack.base.conf')
+const baseWebpackConfig = require('./webpack.m.common.conf')
 
 const buildWebpackConfig = merge(baseWebpackConfig, {
   // BUILD config

@@ -1,6 +1,6 @@
 const webpack =  require('webpack')
 const merge = require('webpack-merge')
-const baseWebpackConfig = require('./3webpack.base.conf')
+const baseWebpackConfig = require('./webpack.m.common.conf')
 
 const devConf = {
     // DEV config
@@ -19,7 +19,7 @@ const devServer = {
   }
 }
 
-const plugins = {
+const devPlugins = {
   plugins: [
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map'
@@ -31,7 +31,7 @@ const devWebpackConfig = merge([
   baseWebpackConfig,
   devServer,
   devConf,
-  plugins
+  devPlugins
 ])
 
 module.exports = new Promise((resolve, reject) => {

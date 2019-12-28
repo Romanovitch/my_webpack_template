@@ -1,11 +1,13 @@
 {
   "name": "my-webpack-template",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev-v3": "webpack-dev-server --open --config ./build/3webpack.dev.conf.js",
-    "build-v3": "webpack --config ./build/3webpack.build.conf.js"
+    "dev": "webpack-dev-server --open --config ./build/webpack.m.dev.conf.js",
+    "build": "webpack --config ./build/webpack.m.build.conf.js",
+    "dev-v1": "webpack-dev-server --open --config ./build/webpack.dev.conf.js",
+    "build-v1": "webpack --config ./build/webpack.build.conf.js"
   },
   "browserslist": [
     "> 1%",
