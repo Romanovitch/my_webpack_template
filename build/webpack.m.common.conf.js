@@ -25,8 +25,8 @@ const htmlMod = require('./modules/html')
 const PAGES_DIR = PATHS.src
 const PAGES = fs.readdirSync(PAGES_DIR).filter(fileName => fileName.endsWith('.html'))
 
-const ANY_PAGES_DIR = PATHS.anyPages
-const anyPAGES = fs.readdirSync(ANY_PAGES_DIR).filter(fileName => fileName.endsWith('.html'))
+// const ANY_PAGES_DIR = PATHS.anyPages
+// const anyPAGES = fs.readdirSync(ANY_PAGES_DIR).filter(fileName => fileName.endsWith('.html'))
 
 module.exports = merge([
   {
@@ -36,15 +36,18 @@ module.exports = merge([
   },
   {
     entry: {
-      app: PATHS.src,
-      // module: `${PATHS.src}/your-module.js`,
+      // app: PATHS.src,
+      index: './src/index',
+      third: './src/third',
+      // module: `${PATHS.src}/third.js`,
     }
   },
   {
     output: {
+      path: PATHS.dist,
       filename: `${PATHS.assets}js/[name].js`,
       // filename: `${PATHS.assets}js/[name].[hash].js`, // +hash к имени файла
-      path: PATHS.dist,
+      library: `${PATHS.assets}js/[name]`,
       publicPath: '/'
     }
   },
@@ -85,9 +88,6 @@ module.exports = merge([
   },
   {
     plugins: [
-      new HtmlWebpackPlugin({
-        template: './src/index.html'
-      }),
       // new VueLoaderPlugin(),
       new MiniCssExtractPlugin({
         filename: `${PATHS.assets}css/[name].css`,
@@ -98,6 +98,10 @@ module.exports = merge([
         // { from: `${PATHS.src}/${PATHS.assets}fonts`, to: `${PATHS.assets}fonts` },
         { from: `${PATHS.src}/static`, to: '' },
       ]),
+
+      new HtmlWebpackPlugin({
+        template: './src/index.html'
+      }),
   
       // Automatic creation any html pages (Don't forget to RERUN dev server)
       // see more: https://github.com/vedees/webpack-template/blob/master/README.md#create-another-html-files
@@ -106,10 +110,12 @@ module.exports = merge([
         template: `${PAGES_DIR}/${page}`,
         filename: `./${page}`
       })),
+
       // ...anyPAGES.map(page => new HtmlWebpackPlugin({
       //   template: `${PAGES_DIR}/${page}`,
       //   filename: `./${page}`
       // })),
+
       new CleanWebpackPlugin(),
       // new CleanWebpackPlugin(['../dist']), //! чегото не работает
       
