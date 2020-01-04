@@ -4,9 +4,40 @@ module.exports = function () {
       rules: [
         {
           test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: '/node_modules/'
+          use: [
+            {
+              loader: 'eslint-loader',
+              options: {
+                enforce: 'pre',
+              }
+            },
+            {
+              loader: 'babel-loader',
+              options: {
+                exclude: '/node_modules/'
+              }
+            }
+          ]
         }
+
+
+
+
+
+
+
+
+
+        // {
+        //   enforce: 'pre',
+        //   test: /\.js$/,
+        //   loader: 'eslint-loader'
+        // },
+        // {
+        //   test: /\.js$/,
+        //   loader: 'babel-loader',
+        //   exclude: '/node_modules/'
+        // }
       ]
     }
   }

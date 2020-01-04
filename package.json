@@ -2,7 +2,7 @@
   "name": "my-webpack-template",
   "version": "1.0.1",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "dev": "webpack-dev-server --open --config ./build/webpack.m.dev.conf.js",
     "build": "webpack --config ./build/webpack.m.build.conf.js",
@@ -37,6 +37,8 @@
     "css-loader": "^3.0.0",
     "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
+    "eslint": "^6.8.0",
+    "eslint-loader": "^3.0.3",
     "file-loader": "^4.0.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",

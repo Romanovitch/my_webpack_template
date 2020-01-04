@@ -38,7 +38,7 @@ module.exports = merge([
     entry: {
       // app: PATHS.src,
       index: './src/index',
-      third: './src/third',
+      // about: './src/third',
       // module: `${PATHS.src}/third.js`,
     }
   },
