@@ -7,6 +7,7 @@ node_modules
 # Dist & test
 test
 dist
+.vscode
 # Other
 npm-debug.log*
 debug.log
